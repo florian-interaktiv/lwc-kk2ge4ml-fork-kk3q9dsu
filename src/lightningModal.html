@@ -1,0 +1,29 @@
+<template>
+  <section role="dialog" tabindex="-1" aria-modal="true" class={modalClasses}>
+    <div class="slds-modal__container">
+      <header class={modalHeaderClasses}>
+        <lightning-button-icon icon-name="utility:close" variant="bare-inverse" class="slds-modal__close" size="large"
+          onclick={closeModalHandler}></lightning-button-icon>
+        <h2 class="slds-text-heading_medium slds-hyphenate">{title}</h2>
+      </header>
+      <div class={modalBodyClasses} oncontentaction={handleContentAction}>
+        <template if:true={options.hasBody}>
+          <slot>Default slot</slot>
+        </template>
+        <template if:false={options.hasBody}>
+          <p>{message}</p>
+        </template>
+      </div>
+      <template if:true={options.hasFooter}>
+        <footer class={modalFooterClasses}>
+          <template for:each={options.actions} for:item="action">
+            <lightning-button label={action.label} onclick={handleActionClick} variant={action.variant}
+              data-action-event={action.event} key={action.key} class="modal-button" icon-name={action.icon}>
+            </lightning-button>
+          </template>
+        </footer>
+      </template>
+    </div>
+  </section>
+  <div class={backdropClasses}></div>
+</template>

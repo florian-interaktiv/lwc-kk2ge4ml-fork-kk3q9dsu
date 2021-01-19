@@ -1,0 +1,138 @@
+<template>
+  <li class={classes}>
+    <template if:false={isRoot}>
+      <c-add-node class="add-before" onclick={handleAddNodeAsParent}></c-add-node>
+    </template>
+    <div>
+      <lightning-card title={node.Name} icon-name="standard:account">
+        <lightning-badge label="Main" slot="actions" class="badge-main"></lightning-badge>
+        <div class="row slds-border_bottom slds-p-left_medium slds-p-right_medium slds-p-bottom_medium">
+          <span>John Doe</span>
+          <div class="group">
+            <lightning-button-icon icon-name="utility:clock" size="medium" variant="bare"></lightning-button-icon>
+          </div>
+        </div>
+        <div class="row slds-p-around_medium slds-border_bottom">
+          <span class="label">Credit limit</span>
+          <div class="group">
+            <lightning-formatted-number format-style="currency" value="40000"></lightning-formatted-number>
+            <lightning-button-icon icon-name="utility:edit" size="medium" variant="bare" class="slds-m-left_small">
+            </lightning-button-icon>
+          </div>
+        </div>
+        <div class="row slds-p-horizontal_medium slds-p-top_medium">
+          <span class="label">Feature points</span>
+          <div class="group">
+            <a href="javascript:void(0)" onclick={handleFeaturePointToggle}>{featurePointToggleLabel}</a>
+            <lightning-button-icon icon-name="utility:add" size="medium" variant="bare" class="slds-m-left_small">
+            </lightning-button-icon>
+          </div>
+        </div>
+        <div class={featurePointsListClasses}>
+          <div class="feature-point">
+            <div class="info">
+              <lightning-button-icon icon-name="utility:record_update" size="medium"></lightning-button-icon>
+              <span class="feature-label slds-m-left_small">
+                Legal contract
+              </span>
+            </div>
+            <div class="controls">
+              <lightning-button-icon icon-name="utility:add" size="small" variant="bare"></lightning-button-icon>
+            </div>
+          </div>
+          <div class="feature-point">
+            <div class="info">
+              <lightning-button-icon icon-name="utility:cart" size="medium"></lightning-button-icon>
+              <span class="feature-label slds-m-left_small">
+                Commercial
+              </span>
+            </div>
+            <div class="controls">
+              <lightning-button-icon icon-name="utility:add" size="small" variant="bare"></lightning-button-icon>
+            </div>
+          </div>
+          <div class="feature-point">
+            <div class="info">
+              <lightning-button-icon icon-name="utility:overflow" size="medium"></lightning-button-icon>
+              <span class="feature-label slds-m-left_small">
+                Credit control
+              </span>
+            </div>
+            <div class="controls">
+              <lightning-button-icon icon-name="utility:add" size="small" variant="bare"></lightning-button-icon>
+            </div>
+          </div>
+          <div class="feature-point">
+            <div class="info">
+              <lightning-button-icon icon-name="utility:moneybag" size="medium"></lightning-button-icon>
+              <span class="feature-label slds-m-left_small">
+                Payer
+              </span>
+            </div>
+            <div class="controls">
+              <lightning-button-icon icon-name="utility:add" size="small" variant="bare"></lightning-button-icon>
+            </div>
+          </div>
+          <div class="feature-point">
+            <div class="info">
+              <lightning-button-icon icon-name="utility:email" size="medium"></lightning-button-icon>
+              <span class="feature-label slds-m-left_small">
+                Invoice distribution
+              </span>
+            </div>
+            <div class="controls">
+              <lightning-button-icon icon-name="utility:add" size="small" variant="bare"></lightning-button-icon>
+            </div>
+          </div>
+          <div class="feature-point">
+            <div class="info">
+              <lightning-button-icon icon-name="utility:desktop" size="medium"></lightning-button-icon>
+              <span class="feature-label slds-m-left_small">
+                Media
+              </span>
+            </div>
+            <div class="controls">
+              <lightning-button-icon icon-name="utility:add" size="small" variant="bare"></lightning-button-icon>
+            </div>
+          </div>
+          <div class="feature-point">
+            <div class="info">
+              <lightning-button-icon icon-name="utility:metrics" size="medium"></lightning-button-icon>
+              <span class="feature-label slds-m-left_small">
+                Reporting
+              </span>
+            </div>
+            <div class="controls">
+              <lightning-button-icon icon-name="utility:add" size="small" variant="bare"></lightning-button-icon>
+            </div>
+          </div>
+        </div>
+        <template if:true={isRoot}>
+          <div class="badge-is-root">
+            <span>Current</span>
+          </div>
+        </template>
+      </lightning-card>
+    </div>
+    <template if:true={hasChildren}>
+      <ul>
+        <template for:each={node.children} for:item="item" for:index="index">
+          <c-node key={item.Id} node={item} index={index} children={node.children}></c-node>
+        </template>
+      </ul>
+    </template>
+    <template if:false={hasChildren}>
+      <div class="add-after">
+        <c-add-node onclick={handleAddNodeAsChild}></c-add-node>
+      </div>
+    </template>
+  </li>
+  <template if:true={isNotLastAndNotRoot}>
+    <li class="placeholder">
+      <div class="add-between">
+        <c-add-node onclick={handleAddNodeAsSibling}></c-add-node>
+      </div>
+    </li>
+  </template>
+
+</template>

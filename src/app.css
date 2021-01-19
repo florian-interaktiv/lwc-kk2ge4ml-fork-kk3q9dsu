@@ -1,0 +1,93 @@
+body, div.tree {
+    background: #fff;
+}
+
+lightning-card {
+    max-width: 350px;
+}
+
+.tree {
+    overflow: auto;
+}
+
+.tree ul {
+  position: relative;
+  padding: 3rem 0;
+  white-space: nowrap;
+  margin: 0 auto;
+  text-align: center;
+}
+.tree ul::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.tree li {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 3rem 0.5rem 0 0.5rem;
+}
+
+.tree li > div {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.tree li::before, .tree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 2px solid #286dcc;
+  width: 50%;
+  height: 3rem;
+}
+.tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 2px solid #286dcc;
+}
+.tree li:only-child::after, .tree li:only-child::before {
+  display: none;
+}
+.tree li:only-child {
+  padding-top: 0;
+}
+.tree li:first-child::before, .tree li:last-child::after {
+  border: 0 none;
+}
+.tree li:last-child::before {
+  border-right: 2px solid #286dcc;
+  border-radius: 0;
+}
+.tree li:first-child::after {
+  border-radius: 0;
+}
+
+.tree ul ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 2px solid #286dcc;
+  width: 0;
+  height: 3rem;
+}
+
+.tree li a:hover,
+.tree li a:hover + ul li a {
+  background: #e9453f;
+  color: #fff;
+  border: 1px solid #e9453f;
+}
+
+.tree li a:hover + ul li::after,
+.tree li a:hover + ul li::before,
+.tree li a:hover + ul::before,
+.tree li a:hover + ul ul::before {
+  border-color: #e9453f;
+}

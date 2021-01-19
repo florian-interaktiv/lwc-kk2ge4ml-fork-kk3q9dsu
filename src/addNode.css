@@ -1,0 +1,17 @@
+.add-item {
+    background: #286dcc;
+    display: flex;
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+
+    transition: background ease-in .1s;
+    cursor: pointer;
+}
+
+.add-item:hover {
+  background: #708baf;
+}
